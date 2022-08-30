@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="app\src\app\components\pages\auth\login\login.component.ts" />
+      <None Remove="app\src\app\components\pages\auth\login\login.component.scss" />
+      <None Remove="app\src\app\components\pages\auth\auth.module.ts" />
+      <None Remove="app\src\app\components\pages\auth\auth-routing.module.ts" />
+    </ItemGroup>
+
+</Project>
