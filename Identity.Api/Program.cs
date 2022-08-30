@@ -3,8 +3,6 @@ using Identity.Core.Grpc;
 using Identity.Core.Grpc.Interfaces;
 using Identity.Core.Validators;
 
-/*------------------------ConfigureServices-------------------------*/
-
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -21,13 +19,6 @@ builder.Services
     .AddInMemoryApiResources(IdentityServerConfiguration.ApiResources)
     .AddInMemoryIdentityResources(IdentityServerConfiguration.IdentityResources)
     .AddDeveloperSigningCredential();
-
-/*------------------------------------------------------------*/
-
-
-
-
-/*------------------------Configure-------------------------*/
 
 WebApplication app = builder.Build();
 
@@ -46,5 +37,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-/*-------------------------------------------------------------*/
