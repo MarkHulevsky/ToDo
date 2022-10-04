@@ -32,7 +32,8 @@ public class AccountService: IAccountService
         {
             Email = request.Email,
             PhoneNumber = request.PhoneNumber,
-            UserName = request.UserName
+            UserName = request.Email,
+            NormalizedUserName = request.UserName
         };
 
         IdentityResult createUserResult = await _userManager.CreateAsync(user, request.Password);

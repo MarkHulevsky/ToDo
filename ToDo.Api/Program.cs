@@ -1,6 +1,9 @@
+using System.Reflection;
+using AutoMapper;
 using Common.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using ToDo.BusinessLogic;
 using ToDo.BusinessLogic.HttpClients;
 using ToDo.BusinessLogic.HttpClients.Interfaces;
 using ToDo.BusinessLogic.Services;
@@ -37,10 +40,10 @@ builder.Services.AddHttpClient<IMailHttpClient, MailHttpClient>(httpClient =>
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddScoped<IToDoDirectoryRepository, ToDoDirectoryRepository>();
-builder.Services.AddScoped<IToDoNoteRepository, ToDoNoteRepository>();
-builder.Services.AddScoped<IToDoDirectoryService, ToDoDirectoryService>();
-builder.Services.AddScoped<IToDoNoteService, ToDoNoteService>();
+builder.Services
+    .ConfigureDataAccessServices()
+    .ConfigureBusinessLogicServices()
+    .ConfigureAutoMapper();
 
 var app = builder.Build();
 

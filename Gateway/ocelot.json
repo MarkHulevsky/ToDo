@@ -1,0 +1,28 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/users/api/account/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7154
+        }
+      ],
+      "UpstreamPathTemplate": "/users/api/account/{everything}",
+      "UpstreamHttpMethod": [ "GET" , "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/todo/api/tododirectory/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7038
+        }
+      ],
+      "UpstreamPathTemplate": "/todo/api/tododirectory/{everything}",
+      "UpstreamHttpMethod": [ "GET" , "POST" ]
+    }
+  ]
+}

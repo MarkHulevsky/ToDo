@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToDo.BusinessLogic.Models.ToDoDirectory.Request;
+using ToDo.BusinessLogic.Models.ToDoDirectory.Response;
 using ToDo.BusinessLogic.Services.Interfaces;
 
 namespace ToDo.Api.Controllers;
@@ -15,6 +16,15 @@ public class ToDoDirectoryController: ControllerBase
     public ToDoDirectoryController(IToDoDirectoryService toDoDirectoryService)
     {
         _toDoDirectoryService = toDoDirectoryService;
+    }
+
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetAll()
+    {
+        GetAllUserDirectoriesResponse response = await _toDoDirectoryService.GetAllUserDirectoriesAsync();
+
+        return Ok(response);
     }
 
     [HttpPost]

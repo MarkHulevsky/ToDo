@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  gatewayUrl: 'https://localhost:7022/',
+  identityConfiguration: {
+    clientId: 'authorized_client_id',
+    scope: 'openid TodoAPI MailAPI UsersAPI',
+    tokenEndpoint: 'https://localhost:7007/connect/token',
+    userInfoEndpoint: 'https://localhost:7007/connect/userinfo'
+  }
 };
 
 /*

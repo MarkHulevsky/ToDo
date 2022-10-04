@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+a {
+  text-decoration: none;
+}
+
+.form-container {
+  height: 100vh;
+
+  .form {
+    width: 25rem;
+    margin: 8rem auto auto;
+
+    & .form-group {
+      margin-bottom: 1rem;
+    }
+  }
+}

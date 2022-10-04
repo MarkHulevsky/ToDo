@@ -17,9 +17,17 @@ public static class IdentityServerConfiguration
             new()
             {
                 ClientId = "authorized_client_id",
-                ClientSecrets = { new Secret("client_secret".Sha256()) },
+                RequireClientSecret = false,
                 AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-                AllowedScopes = { "TodoAPI", "MailAPI", "UsersAPI" }
+                AllowedScopes =
+                {
+                    "openid",
+                    "TodoAPI",
+                    "MailAPI",
+                    "UsersAPI"
+                },
+                AllowAccessTokensViaBrowser = true,
+                RequireConsent = false
             }
         };
 

@@ -2,7 +2,9 @@ using Common.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Users.BusinessLogic.Services;
 using Users.BusinessLogic.Services.Grpc;
+using Users.BusinessLogic.Services.Interfaces;
 using Users.DataAccess;
 using Users.DataAccess.Entities;
 
@@ -22,13 +24,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<User, IdentityRole<Guid>>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddIdentityServerAuthentication(JwtBearerDefaults.AuthenticationScheme, options =>
     {
         options.Authority = identitySettingsSection.GetValue<string>("IssuerUrl");
         options.ApiName = identitySettingsSection.GetValue<string>("Audience");
         options.ApiSecret = identitySettingsSection.GetValue<string>("ApiSecret");
     });
+
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 builder.Services.AddGrpc();
 

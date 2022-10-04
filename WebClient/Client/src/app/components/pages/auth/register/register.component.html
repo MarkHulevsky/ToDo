@@ -1,0 +1,100 @@
+<div class="container d-flex form-container">
+  <div class="card form">
+    <h2 class="card-header">Create account</h2>
+
+    <div *ngIf="isRegistrationFailed" class="alert alert-danger failed-login-error">
+      Something went wrong try later.
+    </div>
+
+    <form class="card-body" (submit)="onSubmit(); $event.stopPropagation()" [formGroup]="formGroup">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" class="form-control" [formControl]="emailControl">
+
+        <div *ngIf="emailControl.invalid && (emailControl.touched || emailControl.dirty)">
+          <div *ngIf="emailControl.errors?.['required']">
+            <small class="text-danger">Email is required.</small>
+          </div>
+
+          <div *ngIf="emailControl.errors?.['email']">
+            <small class="text-danger">Field must have email format.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" type="text" class="form-control" [formControl]="nameControl">
+
+        <div *ngIf="nameControl.invalid && (nameControl.touched || nameControl.dirty)">
+          <div *ngIf="nameControl.errors?.['required']">
+            <small class="text-danger">Name is required.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">Phone number</label>
+        <input id="phoneNumber" type="text" class="form-control" [formControl]="phoneNumberControl">
+
+        <div *ngIf="phoneNumberControl.invalid && (phoneNumberControl.touched || phoneNumberControl.dirty)">
+          <div *ngIf="phoneNumberControl.errors?.['required']">
+            <small class="text-danger">Name is required.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" class="form-control" [formControl]="passwordControl">
+
+        <div *ngIf="passwordControl.invalid && (passwordControl.touched || passwordControl.dirty)">
+          <div *ngIf="passwordControl.errors?.['required']">
+            <small class="text-danger">Password is required.</small>
+          </div>
+
+          <div *ngIf="passwordControl.errors?.['minlength']">
+            <small class="text-danger">Password must be at least 4 characters long.</small>
+          </div>
+
+
+          <div *ngIf="passwordControl.errors?.['maxlength']">
+            <small class="text-danger">Password must be maximum 13 characters long.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input id="confirmPassword" type="password" class="form-control" [formControl]="confirmPassword">
+
+        <div *ngIf="(confirmPassword.invalid || formGroup.invalid) && (confirmPassword.touched || confirmPassword.dirty)">
+          <div *ngIf="confirmPassword.errors?.['required']">
+            <small class="text-danger">Confirm Password is required.</small>
+          </div>
+
+          <div *ngIf="confirmPassword.errors?.['minlength']">
+            <small class="text-danger">Confirm Password must be at least 4 characters long.</small>
+          </div>
+
+
+          <div *ngIf="confirmPassword.errors?.['maxlength']">
+            <small class="text-danger">Confirm Password must be maximum 13 characters long.</small>
+          </div>
+
+          <div *ngIf="formGroup.hasError('doNotMatch')">
+            <small class="text-danger">Passwords do not match.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center">
+        <button type="submit" class="btn btn-primary">
+          Create account
+        </button>
+
+        <a class="link-primary" [routerLink]="['']">Log in</a>
+      </div>
+    </form>
+  </div>
+</div>
