@@ -1,13 +1,8 @@
 export interface GetAllUserDirectoriesResponse {
-  directories: GetAllUserDirectoriesDirectoryResponseModel[];
+  toDoDirectories: GetAllUserDirectoriesDirectoryResponseModel[];
 }
 
 export interface GetAllUserDirectoriesDirectoryResponseModel {
+  id: string;
   name: string;
-  toDoNotes: GetAllUserDirectoriesToDoNoteResponseModel[];
-}
-
-export interface GetAllUserDirectoriesToDoNoteResponseModel {
-  isCompleted: boolean;
-  note: string;
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
-import { catchError, of, switchMap } from 'rxjs';
+import { catchError, of, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -43,7 +43,7 @@ export class LoginComponent {
 
     this._authService.login(this.emailControl.value, this.passwordControl.value)
       .pipe(
-        switchMap(() => this._router.navigate([''])),
+        switchMap(() => this._router.navigate(['/home'])),
         catchError((error) => {
           this.isLoginFailed = true;
           return of(error);

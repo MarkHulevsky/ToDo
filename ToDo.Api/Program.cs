@@ -1,16 +1,8 @@
-using System.Reflection;
-using AutoMapper;
 using Common.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using ToDo.BusinessLogic;
-using ToDo.BusinessLogic.HttpClients;
-using ToDo.BusinessLogic.HttpClients.Interfaces;
-using ToDo.BusinessLogic.Services;
-using ToDo.BusinessLogic.Services.Interfaces;
 using ToDo.DataAccess;
-using ToDo.DataAccess.Repositories;
-using ToDo.DataAccess.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,13 +22,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         options.Authority = identitySettingsSection.GetValue<string>("IssuerUrl");
         options.ApiName = identitySettingsSection.GetValue<string>("Audience");
-        options.ApiSecret = identitySettingsSection.GetValue<string>("ApiSecret");
     });
-
-builder.Services.AddHttpClient<IMailHttpClient, MailHttpClient>(httpClient =>
-{
-    httpClient.BaseAddress = new Uri(builder.Configuration.GetValue<string>("MailServiceUrl"));
-});
 
 builder.Services.AddHttpContextAccessor();
 

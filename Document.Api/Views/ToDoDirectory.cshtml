@@ -1,0 +1,41 @@
+﻿@using Pdf.BusinessLogic.Models
+@model Pdf.BusinessLogic.Models.ToDoDirectoryPdfModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Title</title>
+    <style>
+        .note {
+            display: flex;
+            align-items: center;
+        }
+        
+        input {
+            margin: 0 10px 0 0;
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h3>@Model.Name</h3>
+
+    @foreach (ToDoDirectoryPdfNoteModel note in Model.ToDoNotes)
+    {
+        <div class="note">
+            @Html.CheckBox("IsCompleted", note.IsCompleted)
+            <p>@note.Note</p>
+        </div>
+    }
+</div>
+</body>
+</html>

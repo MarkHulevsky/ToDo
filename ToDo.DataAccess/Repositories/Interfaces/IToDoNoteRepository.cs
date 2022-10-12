@@ -1,6 +1,8 @@
-﻿namespace ToDo.DataAccess.Repositories.Interfaces;
+﻿using ToDo.DataAccess.Entities;
 
-public interface IToDoNoteRepository
+namespace ToDo.DataAccess.Repositories.Interfaces;
+
+public interface IToDoNoteRepository: IBaseRepository<ToDoNote>
 {
-    
+    Task<IList<ToDoNote>> GetAllByDirectoryIdAsync(Guid directoryId);
 }

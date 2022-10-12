@@ -15,7 +15,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         options.ApiName = identitySettingsSection.GetValue<string>("Audience");
         options.Authority = identitySettingsSection.GetValue<string>("IssuerUrl");
-        options.ApiSecret = identitySettingsSection.GetValue<string>("ApiSecret");
     });
 
 

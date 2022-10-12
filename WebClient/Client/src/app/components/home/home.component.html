@@ -1,1 +1,40 @@
-<p>home works!</p>
+<div class="container home">
+  <div class="sidenav card">
+    <div class="directories-header card-header">
+      <input type="text" class="form-control" placeholder="Search"
+             [(ngModel)]="searchText" (ngModelChange)="search()">
+      <button class="btn btn-dark" (click)="addDirectory()">
+        <i class="bi bi-plus"></i>
+      </button>
+    </div>
+
+    <div class="directories-list">
+      <ng-container *ngFor="let directory of toDoDirectories; let index = index">
+        <div class="directory" [ngClass]="{'selected': index === selectedIndex}" (click)="selectedIndex = index">
+          <ng-container *ngIf="!directory.isEditing; else isEditing">
+            {{directory.name}}
+          </ng-container>
+
+          <ng-template #isEditing>
+            <div class="editing-wrapper">
+              <div class="input-wrapper">
+                <input class="form-control" type="text" [(ngModel)]="directory.name" (keyup.enter)="saveDirectory(directory)">
+                <button class="btn btn-danger" (click)="cancelEditing(directory)">
+                  <i class="bi bi-x"></i>
+                </button>
+              </div>
+              <small>Enter to submit</small>
+            </div>
+
+          </ng-template>
+        </div>
+      </ng-container>
+  </div>
+  </div>
+
+  <div class="notes card">
+    <div class="card-body">
+      <app-notes-list [directoryId]="toDoDirectories[selectedIndex]?.id" (downloadPdf)="downloadPdf($event)"></app-notes-list>
+    </div>
+  </div>
+</div>

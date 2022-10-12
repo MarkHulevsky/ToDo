@@ -2,6 +2,12 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+body {
+  background-color: whitesmoke !important;
+  height: 100vh !important;
+}
 
 a {
   text-decoration: none;

@@ -10,6 +10,11 @@ const routes: Routes = [
   },
   {
     path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
     canActivate: [AuthGuard],
     component: HomeComponent
   }

@@ -1,0 +1,72 @@
+@import 'src/app/app-variables';
+
+:host {
+  height: calc(100% - $navbar-height);
+  display: block;
+}
+
+.home {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  padding: .5rem 0 1rem 0;
+}
+
+.sidenav {
+  &.card {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  & .directories-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  & .directories-list {
+    & .directory {
+      display: flex;
+      align-items: center;
+      padding: .5rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color .2s ease-in;
+
+      &:hover {
+        background-color: var(--bs-card-cap-bg);
+      }
+
+      &.selected {
+        background-color: var(--bs-card-cap-bg);
+      }
+
+      & .editing-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        & .input-wrapper {
+          display: flex;
+          gap: 10px;
+        }
+
+        & small {
+          margin-top: 1px;
+          font-size: .6rem;
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+.notes {
+  display: flex;
+  flex: 1;
+
+  &.card {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0;
+  }
+}

@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Mail.Api.Controllers;
 
-[Route("mail/api/[controller]/[action]")]
 [Authorize]
+[Route("mail/api/[controller]/[action]")]
 public class MailController: ControllerBase
 {
     private readonly IMailService _mailService;

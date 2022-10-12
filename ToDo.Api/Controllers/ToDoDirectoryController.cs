@@ -18,13 +18,13 @@ public class ToDoDirectoryController: ControllerBase
         _toDoDirectoryService = toDoDirectoryService;
     }
 
-    [HttpGet]
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAllByFilter([FromBody] GetAllDirectoriesByFilterRequest request)
     {
-        GetAllUserDirectoriesResponse response = await _toDoDirectoryService.GetAllUserDirectoriesAsync();
+        GetAllDirectoriesByFilterResponse byFilterResponse = await _toDoDirectoryService.GetAllUserDirectoriesAsync(request);
 
-        return Ok(response);
+        return Ok(byFilterResponse);
     }
 
     [HttpPost]
@@ -38,6 +38,15 @@ public class ToDoDirectoryController: ControllerBase
         {
             return BadRequest(response);
         }
+
+        return Ok(response);
+    }
+
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        GetToDoDirectoryByIdResponse response = await _toDoDirectoryService.GetByIdAsync(id);
 
         return Ok(response);
     }

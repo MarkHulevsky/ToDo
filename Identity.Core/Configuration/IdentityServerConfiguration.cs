@@ -9,13 +9,6 @@ public static class IdentityServerConfiguration
         {
             new()
             {
-                ClientId = "unauthorized_client_id",
-                ClientSecrets = { new Secret("client_secret".Sha256()) },
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
-                AllowedScopes = { "UsersAPI" }
-            },
-            new()
-            {
                 ClientId = "authorized_client_id",
                 RequireClientSecret = false,
                 AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
@@ -24,10 +17,25 @@ public static class IdentityServerConfiguration
                     "openid",
                     "TodoAPI",
                     "MailAPI",
-                    "UsersAPI"
+                    "UsersAPI",
+                    "PdfAPI"
                 },
                 AllowAccessTokensViaBrowser = true,
-                RequireConsent = false
+                RequireConsent = false,
+                AllowOfflineAccess = true
+            },
+            new()
+            {
+                ClientId = "client_id",
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                AllowedScopes =
+                {
+                    "TodoAPI",
+                    "MailAPI",
+                    "UsersAPI",
+                    "PdfAPI"
+                },
+                ClientSecrets = { new Secret("client_secret".Sha256()) }
             }
         };
 
@@ -36,7 +44,8 @@ public static class IdentityServerConfiguration
         {
             new("TodoAPI"),
             new("MailAPI"),
-            new("UsersAPI")
+            new("UsersAPI"),
+            new("DocumentAPI"),
         };
 
     public static IEnumerable<ApiResource> ApiResources =>
@@ -56,6 +65,11 @@ public static class IdentityServerConfiguration
             {
                 Scopes = { "UsersAPI" },
                 ApiSecrets = { new Secret("mailAPI_secret".Sha256()) }
+            },
+            new("DocumentAPI")
+            {
+                Scopes = { "DocumentAPI" },
+                ApiSecrets = { new Secret("documentAPI_secret".Sha256()) }
             }
         };
 
@@ -63,6 +77,6 @@ public static class IdentityServerConfiguration
         new List<IdentityResource>
         {
             new IdentityResources.OpenId(),
-            new IdentityResources.Profile()
+            new IdentityResources.Profile(),
         };
 }

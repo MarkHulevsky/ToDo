@@ -29,7 +29,6 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>()
     {
         options.Authority = identitySettingsSection.GetValue<string>("IssuerUrl");
         options.ApiName = identitySettingsSection.GetValue<string>("Audience");
-        options.ApiSecret = identitySettingsSection.GetValue<string>("ApiSecret");
     });
 
 builder.Services.AddScoped<IAccountService, AccountService>();

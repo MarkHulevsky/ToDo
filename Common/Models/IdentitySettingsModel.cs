@@ -6,5 +6,7 @@ public class IdentitySettingsModel
 
     public string Audience { get; set; }
 
-    public string ApiSecret { get; set; }
+    public string ClientId { get; set; }
+
+    public string ClientSecret { get; set; }
 }

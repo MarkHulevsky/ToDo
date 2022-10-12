@@ -9,11 +9,16 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { NotesListComponent } from './components/notes-list/notes-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    NotesListComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +26,9 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     OAuthModule.forRoot(),
     AppRoutingModule,
     AuthModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

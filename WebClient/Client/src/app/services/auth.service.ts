@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { OAuthService} from 'angular-oauth2-oidc';
 import { environment } from '../../environments/environment';
-import { from, Observable } from 'rxjs';
+import { BehaviorSubject, from, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  isAuthorized$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private readonly _oAuthService: OAuthService) {
     _oAuthService.clientId = environment.identityConfiguration.clientId;
@@ -25,11 +26,18 @@ export class AuthService {
   }
 
   isAccessTokenValid(): boolean {
-    return this._oAuthService.hasValidAccessToken();
+    const hasValidAccessToken = this._oAuthService.hasValidAccessToken();
+    this.isAuthorized$.next(hasValidAccessToken);
+    return hasValidAccessToken;
   }
 
   login(email: string, password: string): Observable<any> {
-    return from(this._oAuthService.fetchTokenUsingPasswordFlow(email, password));
+    return from(this._oAuthService.fetchTokenUsingPasswordFlow(email, password))
+      .pipe(
+        tap(() => {
+          this.isAuthorized$.next(true);
+        })
+      );
   }
 
   refresh(): Observable<any> {
@@ -43,5 +51,6 @@ export class AuthService {
 
   logout(): void {
     this._oAuthService.logOut();
+    this.isAuthorized$.next(false);
   }
 }

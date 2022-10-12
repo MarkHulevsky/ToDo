@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using ToDo.BusinessLogic.Models.ToDoDirectory.Response;
+using ToDo.BusinessLogic.Models.ToDoNote.Request;
+using ToDo.BusinessLogic.Models.ToDoNote.Response;
 using ToDo.DataAccess.Entities;
 
 namespace ToDo.BusinessLogic.MapperProfiles;
@@ -8,6 +9,6 @@ public class ToDoNoteProfile: Profile
 {
     public ToDoNoteProfile()
     {
-        CreateMap<ToDoNote, GetAllUserDirectoriesToDoNoteResponseModel>();
+        CreateMap<ToDoNote, GetAllToDoNotesByDirectoryIdResponseItemModel>();
     }
 }

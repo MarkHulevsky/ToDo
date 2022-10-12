@@ -7,5 +7,8 @@ namespace ToDo.BusinessLogic.Services.Interfaces;
 public interface IToDoDirectoryService
 {
     Task<BaseResponseModel> CreateAsync(CreateToDoDirectoryRequest request);
-    Task<GetAllUserDirectoriesResponse> GetAllUserDirectoriesAsync();
+
+    Task<GetAllDirectoriesByFilterResponse> GetAllUserDirectoriesAsync(GetAllDirectoriesByFilterRequest request);
+
+    Task<GetToDoDirectoryByIdResponse> GetByIdAsync(Guid id);
 }

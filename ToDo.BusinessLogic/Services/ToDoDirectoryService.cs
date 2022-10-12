@@ -7,6 +7,7 @@ using ToDo.BusinessLogic.Models.ToDoDirectory.Request;
 using ToDo.BusinessLogic.Models.ToDoDirectory.Response;
 using ToDo.BusinessLogic.Services.Interfaces;
 using ToDo.DataAccess.Entities;
+using ToDo.DataAccess.Models.ToDoDirectory;
 using ToDo.DataAccess.Repositories.Interfaces;
 
 namespace ToDo.BusinessLogic.Services;
@@ -25,16 +26,30 @@ public class ToDoDirectoryService: IToDoDirectoryService
         _mapper = mapper;
     }
 
-    public async Task<GetAllUserDirectoriesResponse> GetAllUserDirectoriesAsync()
+    public async Task<GetAllDirectoriesByFilterResponse> GetAllUserDirectoriesAsync(GetAllDirectoriesByFilterRequest request)
     {
         Guid? userId = _httpContextAccessor.HttpContext.User.Identity!.GetUserId()!;
 
-        IList<ToDoDirectory> toDoDirectories = await _toDoDirectoryRepository.GetAllUserDirectoriesAsync(userId.Value);
+        var filterModel = _mapper.Map<GetAllUserDirectoriesByFilterModel>(request);
 
-        var response = new GetAllUserDirectoriesResponse
+        filterModel.UserId = userId.Value;
+
+        IList<ToDoDirectory> toDoDirectories =
+            await _toDoDirectoryRepository.GetAllUserDirectoriesByFilterAsync(filterModel);
+
+        var response = new GetAllDirectoriesByFilterResponse
         {
-            ToDoDirectories = _mapper.Map<IEnumerable<GetAllUserDirectoriesDirectoryResponseModel>>(toDoDirectories)
+            ToDoDirectories = _mapper.Map<IEnumerable<GetAllDirectoriesByFilterResponseItemModel>>(toDoDirectories)
         };
+
+        return response;
+    }
+
+    public async Task<GetToDoDirectoryByIdResponse> GetByIdAsync(Guid id)
+    {
+        ToDoDirectory? toDoDirectory = await _toDoDirectoryRepository.GetByIdAsync(id);
+
+        var response = _mapper.Map<GetToDoDirectoryByIdResponse>(toDoDirectory);
 
         return response;
     }

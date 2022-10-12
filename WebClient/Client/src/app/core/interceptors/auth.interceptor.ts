@@ -34,7 +34,7 @@ export class AuthInterceptor implements HttpInterceptor {
           if (!refreshToken) {
             this._authService.logout();
 
-            return from(this._router.navigate([''], { replaceUrl: true }));
+            return from(this._router.navigate(['/auth/login'], { replaceUrl: true }));
           }
 
           return this._authService.refresh()

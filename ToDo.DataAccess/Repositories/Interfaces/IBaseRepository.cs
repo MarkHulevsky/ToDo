@@ -9,4 +9,6 @@ public interface IBaseRepository<TEntity> where TEntity: BaseEntity
     Task CreateAsync(TEntity entity);
 
     Task CreateRangeAsync(IEnumerable<TEntity> entities);
+
+    Task UpdateAsync(TEntity entity);
 }

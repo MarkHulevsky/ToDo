@@ -15,7 +15,7 @@ public abstract class BaseRepository<TEntity>: IBaseRepository<TEntity> where TE
         _dbContext = dbContext;
     }
 
-    public async Task<TEntity?> GetByIdAsync(Guid id)
+    public virtual async Task<TEntity?> GetByIdAsync(Guid id)
     {
         return await EntitySet.FirstOrDefaultAsync(entity => entity.Id == id);
     }
@@ -30,6 +30,13 @@ public abstract class BaseRepository<TEntity>: IBaseRepository<TEntity> where TE
     public async Task CreateRangeAsync(IEnumerable<TEntity> entities)
     {
         await EntitySet.AddRangeAsync(entities);
+
+        await SaveChangesAsync();
+    }
+
+    public async Task UpdateAsync(TEntity entity)
+    {
+        EntitySet.Update(entity);
 
         await SaveChangesAsync();
     }

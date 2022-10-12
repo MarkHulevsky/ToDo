@@ -1,0 +1,39 @@
+.notes-container {
+  display: flex;
+  flex-direction: column;
+
+  & .actions {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.notes-list {
+  margin-top: 1.5rem;
+  margin-left: 1rem;
+}
+
+.note {
+  display: flex;
+  gap: 10px;
+
+  & .editing-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    & .input-wrapper {
+      display: flex;
+      gap: 10px;
+    }
+
+    & small {
+      margin-top: 1px;
+      font-size: .6rem;
+      color: black;
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
