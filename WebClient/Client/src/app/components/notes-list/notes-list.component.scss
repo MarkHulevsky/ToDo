@@ -6,16 +6,33 @@
     display: flex;
     gap: 10px;
   }
+
+  & .header {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+    align-items: center;
+
+    & h5 {
+      margin: 0;
+    }
+  }
 }
 
 .notes-list {
-  margin-top: 1.5rem;
   margin-left: 1rem;
 }
 
 .note {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1rem 1fr;
   gap: 10px;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  .checkbox {
+    margin: 0;
+  }
 
   & .editing-wrapper {
     display: flex;
@@ -24,6 +41,10 @@
     & .input-wrapper {
       display: flex;
       gap: 10px;
+
+      & .btn.btn-danger {
+        align-self: flex-start;
+      }
     }
 
     & small {

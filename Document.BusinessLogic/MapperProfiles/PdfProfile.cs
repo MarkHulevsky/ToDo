@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Pdf.BusinessLogic.HttpClients.Models.ToDo.Response;
-using Pdf.BusinessLogic.Models;
+using Document.BusinessLogic.HttpClients.Models.ToDo.Response;
+using Document.BusinessLogic.Models;
 
-namespace Pdf.BusinessLogic.MapperProfiles;
+namespace Document.BusinessLogic.MapperProfiles;
 
 public class PdfProfile: Profile
 {

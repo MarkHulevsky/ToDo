@@ -1,9 +1,9 @@
 ﻿using iText.Html2pdf;
 using iText.Html2pdf.Resolver.Font;
 using iText.Kernel.Pdf;
-using Pdf.BusinessLogic.Helpers.Interfaces;
+using Document.BusinessLogic.Helpers.Interfaces;
 
-namespace Pdf.BusinessLogic.Helpers;
+namespace Document.BusinessLogic.Helpers;
 
 public class PdfHelper: IPdfHelper
 {

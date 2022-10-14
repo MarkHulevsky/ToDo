@@ -1,4 +1,4 @@
-﻿namespace Pdf.BusinessLogic.Providers.Interfaces;
+﻿namespace Document.BusinessLogic.Providers.Interfaces;
 
 public interface IRazorProvider
 {

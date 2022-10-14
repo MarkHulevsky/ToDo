@@ -1,4 +1,4 @@
-﻿namespace Pdf.BusinessLogic.Helpers.Interfaces;
+﻿namespace Document.BusinessLogic.Helpers.Interfaces;
 
 public interface IPdfHelper
 {

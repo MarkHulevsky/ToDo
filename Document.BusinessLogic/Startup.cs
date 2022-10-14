@@ -1,14 +1,14 @@
 ﻿using System.Reflection;
 using AutoMapper;
+using Document.BusinessLogic.Helpers;
+using Document.BusinessLogic.Helpers.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using Pdf.BusinessLogic.Helpers;
-using Pdf.BusinessLogic.Helpers.Interfaces;
-using Pdf.BusinessLogic.Providers;
-using Pdf.BusinessLogic.Providers.Interfaces;
-using Pdf.BusinessLogic.Services;
-using Pdf.BusinessLogic.Services.Interfaces;
+using Document.BusinessLogic.Providers;
+using Document.BusinessLogic.Providers.Interfaces;
+using Document.BusinessLogic.Services;
+using Document.BusinessLogic.Services.Interfaces;
 
-namespace Pdf.BusinessLogic;
+namespace Document.BusinessLogic;
 
 public static class Startup
 {
@@ -17,6 +17,7 @@ public static class Startup
         serviceCollection.AddScoped<IRazorProvider, RazorProvider>();
         serviceCollection.AddScoped<IPdfHelper, PdfHelper>();
         serviceCollection.AddScoped<IPdfService, PdfService>();
+        serviceCollection.AddScoped<IBlobService, BlobService>();
 
         return serviceCollection;
     }

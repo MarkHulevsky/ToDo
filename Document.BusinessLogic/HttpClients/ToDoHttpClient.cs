@@ -3,11 +3,11 @@ using System.Text.Json;
 using Common.Models;
 using IdentityModel.Client;
 using Microsoft.Extensions.Options;
-using Pdf.BusinessLogic.Constants;
-using Pdf.BusinessLogic.HttpClients.Interfaces;
-using Pdf.BusinessLogic.HttpClients.Models.ToDo.Response;
+using Document.BusinessLogic.Constants;
+using Document.BusinessLogic.HttpClients.Interfaces;
+using Document.BusinessLogic.HttpClients.Models.ToDo.Response;
 
-namespace Pdf.BusinessLogic.HttpClients;
+namespace Document.BusinessLogic.HttpClients;
 
 public class ToDoHttpClient: IdentityHttpClient, IToDoHttpClient
 {

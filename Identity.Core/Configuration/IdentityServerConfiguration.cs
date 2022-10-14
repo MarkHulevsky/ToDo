@@ -18,7 +18,7 @@ public static class IdentityServerConfiguration
                     "TodoAPI",
                     "MailAPI",
                     "UsersAPI",
-                    "PdfAPI"
+                    "DocumentAPI"
                 },
                 AllowAccessTokensViaBrowser = true,
                 RequireConsent = false,
@@ -33,7 +33,7 @@ public static class IdentityServerConfiguration
                     "TodoAPI",
                     "MailAPI",
                     "UsersAPI",
-                    "PdfAPI"
+                    "DocumentAPI"
                 },
                 ClientSecrets = { new Secret("client_secret".Sha256()) }
             }

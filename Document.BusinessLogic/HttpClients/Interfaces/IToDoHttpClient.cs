@@ -1,6 +1,6 @@
-﻿using Pdf.BusinessLogic.HttpClients.Models.ToDo.Response;
+﻿using Document.BusinessLogic.HttpClients.Models.ToDo.Response;
 
-namespace Pdf.BusinessLogic.HttpClients.Interfaces;
+namespace Document.BusinessLogic.HttpClients.Interfaces;
 
 public interface IToDoHttpClient
 {

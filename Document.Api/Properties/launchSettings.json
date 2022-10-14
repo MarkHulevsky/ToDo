@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "Pdf.Api": {
+    "Document.Api": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchUrl": "swagger",

@@ -1,6 +1,10 @@
-﻿namespace Pdf.BusinessLogic.Services.Interfaces;
+﻿using Document.BusinessLogic.Models.Response;
+
+namespace Document.BusinessLogic.Services.Interfaces;
 
 public interface IPdfService
 {
-    Task<Stream> GetByDirectoryIdAsync(Guid directoryId);
+    Task<GeneratePdfByDirectoryIdResponse> GenerateByDirectoryIdAsync(Guid directoryId);
+
+    Task<Stream> DownloadAsync(Guid fileId);
 }

@@ -1,0 +1,28 @@
+@import 'src/app/app-variables';
+
+:host {
+  height: calc(100vh - $navbar-height);
+  display: block;
+}
+
+.pdf-preview {
+  height: 100%;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+
+  & .card {
+    height: 100%;
+
+    & .card-body {
+      padding: 0;
+    }
+
+    & .actions {
+      display: flex;
+    }
+
+    & .pdf-viewer {
+      height: 100%;
+    }
+  }
+}

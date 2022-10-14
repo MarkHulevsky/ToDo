@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { OAuthService} from 'angular-oauth2-oidc';
 import { environment } from '../../environments/environment';
-import { BehaviorSubject, from, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, from, Observable, of, switchMap, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -41,12 +41,13 @@ export class AuthService {
   }
 
   refresh(): Observable<any> {
-    return from(
-      this._oAuthService.refreshToken()
-        .then(() => {
-          return this._oAuthService.loadUserProfile();
+    return from(this._oAuthService.refreshToken())
+      .pipe(
+        switchMap(() => this._oAuthService.loadUserProfile()),
+        catchError(() => {
+          return EMPTY;
         })
-    );
+      );
   }
 
   logout(): void {

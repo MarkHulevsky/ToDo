@@ -1,5 +1,5 @@
-﻿@using Pdf.BusinessLogic.Models
-@model Pdf.BusinessLogic.Models.ToDoDirectoryPdfModel
+﻿@using Document.BusinessLogic.Models
+@model Document.BusinessLogic.Models.ToDoDirectoryPdfModel
 
 @{
     Layout = null;
@@ -9,11 +9,21 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title>Todo list</title>
     <style>
+        body {
+            background-color: whitesmoke;
+        }
+
+        .container {
+            padding-left: 1rem;
+            font-size: 1.3rem;
+        }
+
         .note {
             display: flex;
             align-items: center;
+            margin-bottom: 1rem;
         }
         
         input {
@@ -26,7 +36,8 @@
     </style>
 </head>
 <body>
-<div>
+@await Html.PartialAsync("~/Views/_Header.cshtml")
+<div class="container">
     <h3>@Model.Name</h3>
 
     @foreach (ToDoDirectoryPdfNoteModel note in Model.ToDoNotes)

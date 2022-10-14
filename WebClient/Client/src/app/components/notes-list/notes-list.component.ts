@@ -7,7 +7,6 @@ import {
 } from '../../models/todo-note/response/get-all-todo-notes-by-directory-id.response';
 import { CreateToDoNoteRequest } from '../../models/todo-note/request/create-todo-note.request';
 import { UpdateToDoNoteRequest } from '../../models/todo-note/request/update-todo-note.request';
-import { PdfService } from '../../services/pdf.service';
 
 @Component({
   selector: 'app-notes-list',
@@ -16,7 +15,6 @@ import { PdfService } from '../../services/pdf.service';
 })
 export class NotesListComponent implements OnChanges {
   @Input() directoryId?: string;
-  @Output() downloadPdf: EventEmitter<string> = new EventEmitter<string>();
 
   toDoNotes: ToDoNoteModel[] = [];
 
@@ -82,10 +80,6 @@ export class NotesListComponent implements OnChanges {
     };
 
     this.toDoNotes.unshift(note);
-  }
-
-  onDownloadPdf(): void {
-    this.downloadPdf.emit(this.directoryId);
   }
 
   private _loadNotes(): Observable<ToDoNoteModel[]> {

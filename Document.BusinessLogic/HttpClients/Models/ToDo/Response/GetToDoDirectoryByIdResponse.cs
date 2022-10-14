@@ -1,6 +1,6 @@
 ﻿using Common.Models;
 
-namespace Pdf.BusinessLogic.HttpClients.Models.ToDo.Response;
+namespace Document.BusinessLogic.HttpClients.Models.ToDo.Response;
 
 public class GetToDoDirectoryByIdResponse: BaseResponseModel
 {

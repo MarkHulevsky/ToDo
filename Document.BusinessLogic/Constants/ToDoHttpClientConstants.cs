@@ -1,4 +1,4 @@
-﻿namespace Pdf.BusinessLogic.Constants;
+﻿namespace Document.BusinessLogic.Constants;
 
 public static class ToDoHttpClientConstants
 {

@@ -1,9 +1,9 @@
 ﻿using Common.Models;
 using IdentityModel.Client;
 using Microsoft.Extensions.Options;
-using Pdf.BusinessLogic.Constants;
+using Document.BusinessLogic.Constants;
 
-namespace Pdf.BusinessLogic.HttpClients;
+namespace Document.BusinessLogic.HttpClients;
 
 public class IdentityHttpClient
 {

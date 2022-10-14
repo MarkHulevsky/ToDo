@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ToDoDirectoryService } from '../../services/todo-directory.service';
-import { map, Observable, tap } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, fromEvent, map, Observable, of, switchMap, tap } from 'rxjs';
 import { ToDoDirectoryModel } from './models/todo-directory-model';
 import {
   GetAllUserDirectoriesResponse
@@ -12,6 +12,9 @@ import { CreateToDoDirectoryRequest } from '../../models/todo-directories/reques
 import { HttpEventType } from '@angular/common/http';
 import { saveAs } from '@progress/kendo-file-saver';
 import { PdfService } from '../../services/pdf.service';
+import { NotifierService } from 'angular-notifier';
+import { LoaderService } from '../../services/loader.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -20,20 +23,33 @@ import { PdfService } from '../../services/pdf.service';
 })
 export class HomeComponent implements OnInit {
   toDoDirectories: ToDoDirectoryModel[] = [];
-  searchText?: string;
   selectedIndex = 0;
+  @ViewChild('searchInput', { static: true }) searchInputRef!: ElementRef;
 
-  constructor(private readonly _todoDirectoryService: ToDoDirectoryService,
-              private readonly _pdfService: PdfService) {}
+  constructor(
+    private readonly _todoDirectoryService: ToDoDirectoryService,
+    private readonly _pdfService: PdfService,
+    private readonly _notifier: NotifierService,
+    private readonly _loaderService: LoaderService,
+    private readonly _router: Router) {
+  }
 
   ngOnInit(): void {
+    this._loaderService.show();
     this._loadDirectories()
       .pipe(
         tap((toDoDirectories) => {
           this.toDoDirectories = toDoDirectories;
+          this._loaderService.hide();
+        }),
+        catchError((error) => {
+          this._loaderService.hide();
+          return of(error);
         })
       )
       .subscribe();
+
+    this._registerSearchEvent();
   }
 
   search(): void {
@@ -46,16 +62,17 @@ export class HomeComponent implements OnInit {
       .subscribe();
   }
 
-  downloadPdf(directoryId: string): void {
-    this._pdfService.getByDirectoryId(directoryId)
+  generatePdf(directoryId: string): void {
+    this._loaderService.show();
+
+    this._pdfService.generateByDirectoryId(directoryId)
       .pipe(
         tap((response) => {
-          if (response.type !== HttpEventType.Response) {
-            return;
-          }
-
-          const blob = new Blob([response.body], { type: 'application/pdf' });
-          saveAs(blob, `TodoList.pdf`);
+          this._router.navigate(['pdf-preview', response.id]);
+        }),
+        catchError((error) => {
+          this._loaderService.hide();
+          return of(error);
         })
       )
       .subscribe();
@@ -73,6 +90,12 @@ export class HomeComponent implements OnInit {
     };
 
     this._todoDirectoryService.create(createRequest)
+      .pipe(
+        switchMap(() => this._loadDirectories()),
+        tap((toDoDirectories) => {
+          this.toDoDirectories = toDoDirectories;
+        })
+      )
       .subscribe();
   }
 
@@ -96,9 +119,26 @@ export class HomeComponent implements OnInit {
     this.selectedIndex++;
   }
 
-  private _loadDirectories(): Observable<ToDoDirectoryModel[]> {
+  private _registerSearchEvent(): void {
+    fromEvent(this.searchInputRef.nativeElement, 'keyup')
+      .pipe(
+        map((value) => {
+          const event = value as KeyboardEvent;
+          return (event.target as HTMLInputElement).value
+        }),
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap((value) => this._loadDirectories(value)),
+        tap((toDoDirectories) => {
+          this.toDoDirectories = toDoDirectories;
+        })
+      )
+      .subscribe();
+  }
+
+  private _loadDirectories(searchText?: string): Observable<ToDoDirectoryModel[]> {
     const request: GetAllToDoDirectoriesByFilterRequest = {
-      searchText: this.searchText
+      searchText: searchText
     };
 
     return this._todoDirectoryService.getAllByFilter(request)

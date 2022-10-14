@@ -7,7 +7,7 @@ export const environment = {
   gatewayUrl: 'https://localhost:7022/',
   identityConfiguration: {
     clientId: 'authorized_client_id',
-    scope: 'openid offline_access TodoAPI MailAPI UsersAPI PdfAPI',
+    scope: 'openid offline_access TodoAPI MailAPI UsersAPI DocumentAPI',
     tokenEndpoint: 'https://localhost:7007/connect/token',
     userInfoEndpoint: 'https://localhost:7007/connect/userinfo',
   }

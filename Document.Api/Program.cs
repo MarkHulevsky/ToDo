@@ -1,9 +1,12 @@
+using Azure.Storage.Blobs;
 using Common.Models;
+using Document.DataAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Pdf.BusinessLogic;
-using Pdf.BusinessLogic.Constants;
-using Pdf.BusinessLogic.HttpClients;
-using Pdf.BusinessLogic.HttpClients.Interfaces;
+using Document.BusinessLogic;
+using Document.BusinessLogic.Constants;
+using Document.BusinessLogic.HttpClients;
+using Document.BusinessLogic.HttpClients.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,10 @@ builder.Services.AddSwaggerGen();
 
 IConfigurationSection identitySettingsSection = builder.Configuration.GetSection("IdentitySettings");
 builder.Services.Configure<IdentitySettingsModel>(identitySettingsSection);
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
@@ -33,7 +40,13 @@ builder.Services.AddHttpClient<IToDoHttpClient, ToDoHttpClient>(client =>
     client.BaseAddress = new Uri(toDoServiceOrigin)
 );
 
-builder.Services.ConfigureBusinessLogic()
+builder.Services.AddSingleton(_ =>
+    new BlobServiceClient(builder.Configuration.GetValue<string>("AzureBlobStorageConnectionString"))
+);
+
+builder.Services
+    .ConfigureDataAccess()
+    .ConfigureBusinessLogic()
     .ConfigureAutoMapper();
 
 builder.Services.AddControllersWithViews();

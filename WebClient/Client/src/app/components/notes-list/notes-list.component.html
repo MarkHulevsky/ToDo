@@ -1,19 +1,14 @@
 <div class="notes-container">
-  <div class="actions">
-    <button class="btn btn-dark" (click)="addNote()">
-      <i class="bi bi-plus"></i>
-    </button>
-
-    <button class="btn btn-dark" (click)="onDownloadPdf()">
-      <i class="bi bi-file-pdf"></i>
-    </button>
-  </div>
-
-  <div class="notes-list">
-    <h5>Notes</h5>
+  <div class="notes-list card-body">
+    <div class="header">
+      <h5>Notes</h5>
+      <button class="btn btn-dark" (click)="addNote()">
+        <i class="bi bi-plus"></i>
+      </button>
+    </div>
     <ng-container *ngFor="let note of toDoNotes">
       <div class="note">
-        <input type="checkbox" class="form-check-input" [ngClass]="{'hidden': note.isEditing}"
+        <input type="checkbox" class="checkbox form-check-input" [ngClass]="{'hidden': note.isEditing}"
                [(ngModel)]="note.isCompleted" (ngModelChange)="completionStatusChange(note)">
 
         <ng-container *ngIf="!note.isEditing; else isEditing">
@@ -24,7 +19,7 @@
         <ng-template #isEditing>
           <div class="editing-wrapper">
             <div class="input-wrapper">
-              <input class="form-control" type="text" [(ngModel)]="note.note" (keyup.enter)="saveNote(note)">
+              <textarea class="form-control" type="text" [(ngModel)]="note.note" (keyup.enter)="saveNote(note)"></textarea>
               <button class="btn btn-danger" (click)="cancelEditing(note)">
                 <i class="bi bi-x"></i>
               </button>

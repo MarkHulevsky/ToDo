@@ -22,9 +22,11 @@
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
     "@popperjs/core": "^2.10.2",
     "@progress/kendo-file-saver": "^1.1.1",
+    "angular-notifier": "^11.0.0",
     "angular-oauth2-oidc": "^13.0.1",
     "bootstrap": "^5.2.2",
     "bootstrap-icons": "^1.9.1",
+    "ng2-pdf-viewer": "^9.1.2",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

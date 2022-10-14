@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpEvent } from '@angular/common/http';
+import { GeneratePdfByDirectoryIdResponse } from '../models/document/response/generate-pdf-by-directory-id.response';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,12 @@ export class PdfService {
 
   constructor(private readonly _http: HttpClient) { }
 
-  getByDirectoryId(directoryId: string): Observable<HttpEvent<any>> {
-    return this._http.get(`${this._pdfUrl}getByDirectoryId/${directoryId}`, {
+  generateByDirectoryId(directoryId: string): Observable<GeneratePdfByDirectoryIdResponse> {
+    return this._http.get<GeneratePdfByDirectoryIdResponse>(`${this._pdfUrl}generateByDirectoryId/${directoryId}`);
+  }
+
+  download(fileId: string): Observable<HttpEvent<any>> {
+    return this._http.get(`${this._pdfUrl}downloadFile/${fileId}`, {
       observe: 'events',
       reportProgress: true,
       responseType: 'blob' as 'json'

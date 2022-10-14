@@ -1,4 +1,4 @@
-﻿namespace Pdf.BusinessLogic.Models;
+﻿namespace Document.BusinessLogic.Models;
 
 public class ToDoDirectoryPdfModel
 {

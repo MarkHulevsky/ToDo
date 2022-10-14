@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
-using Pdf.BusinessLogic.Providers.Interfaces;
+using Document.BusinessLogic.Providers.Interfaces;
 
-namespace Pdf.BusinessLogic.Providers;
+namespace Document.BusinessLogic.Providers;
 
 public class RazorProvider: IRazorProvider
 {
