@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using ToDo.BusinessLogic.Models.ToDoNote.Request;
 using ToDo.BusinessLogic.Models.ToDoNote.Response;
 using ToDo.DataAccess.Entities;
 

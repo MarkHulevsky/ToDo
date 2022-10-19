@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Users.BusinessLogic;
-using Users.BusinessLogic.Services;
 using Users.BusinessLogic.Services.Grpc;
-using Users.BusinessLogic.Services.Interfaces;
 using Users.DataAccess;
 using Users.DataAccess.Entities;
 
