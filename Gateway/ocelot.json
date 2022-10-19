@@ -1,7 +1,7 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/users/api/account/{everything}",
+      "DownstreamPathTemplate": "/users/api/{controller}/{action}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -9,9 +9,10 @@
           "Port": 7154
         }
       ],
-      "UpstreamPathTemplate": "/users/api/account/{everything}",
+      "UpstreamPathTemplate": "/users/api/{controller}/{action}",
       "UpstreamHttpMethod": [ "GET" , "POST" ]
     },
+    
     {
       "DownstreamPathTemplate": "/todo/api/tododirectory/{everything}",
       "DownstreamScheme": "https",
@@ -37,7 +38,7 @@
       "UpstreamHttpMethod": [ "GET" , "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/pdf/api/pdf/{everything}",
+      "DownstreamPathTemplate": "/document/api/document/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -45,7 +46,7 @@
           "Port": 7282
         }
       ],
-      "UpstreamPathTemplate": "/pdf/api/pdf/{everything}",
+      "UpstreamPathTemplate": "/document/api/document/{everything}",
       "UpstreamHttpMethod": [ "GET" , "POST" ]
     }
   ]

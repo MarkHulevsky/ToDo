@@ -1,8 +1,8 @@
-﻿using Mail.BusinessLogic.Models.Request;
+﻿using Mail.BusinessLogic.Models;
 
 namespace Mail.BusinessLogic.Services.Interfaces;
 
 public interface IMailService
 {
-    public Task SendEmailAsync(SendEmailRequest request);
+    public Task SendFileViaEmailAsync(SendViaEmailQueueMessageModel queueMessageModel);
 }

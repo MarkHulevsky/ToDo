@@ -6,14 +6,14 @@ using Document.BusinessLogic.Services.Interfaces;
 namespace Document.Api.Controllers;
 
 [Authorize]
-[Route("pdf/api/[controller]/[action]")]
-public class PdfController: ControllerBase
+[Route("document/api/[controller]/[action]")]
+public class DocumentController: ControllerBase
 {
-    private readonly IPdfService _pdfService;
+    private readonly IDocumentService _documentService;
 
-    public PdfController(IPdfService pdfService)
+    public DocumentController(IDocumentService documentService)
     {
-        _pdfService = pdfService;
+        _documentService = documentService;
     }
 
     [HttpGet("{directoryId}")]
@@ -21,7 +21,7 @@ public class PdfController: ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GenerateByDirectoryId(Guid directoryId)
     {
-        GeneratePdfByDirectoryIdResponse response = await _pdfService.GenerateByDirectoryIdAsync(directoryId);
+        GeneratePdfByDirectoryIdResponse response = await _documentService.GenerateByDirectoryIdAsync(directoryId);
 
         if (!response.IsSucceeded)
         {
@@ -36,8 +36,17 @@ public class PdfController: ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> DownloadFile(Guid fileId)
     {
-        Stream file = await _pdfService.DownloadAsync(fileId);
+        Stream file = await _documentService.DownloadAsync(fileId);
 
         return File(file, "application/octet-stream");
+    }
+
+    [HttpGet("{fileId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> SendViaEmail(Guid fileId)
+    {
+        await _documentService.SendViaEmailAsync(fileId);
+
+        return Ok();
     }
 }

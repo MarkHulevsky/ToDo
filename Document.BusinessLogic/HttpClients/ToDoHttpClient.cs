@@ -1,5 +1,4 @@
 ﻿using System.Net.Http.Json;
-using System.Text.Json;
 using Common.Models;
 using IdentityModel.Client;
 using Microsoft.Extensions.Options;
@@ -25,7 +24,7 @@ public class ToDoHttpClient: IdentityHttpClient, IToDoHttpClient
 
         _httpClient.SetBearerToken(tokenResponse.AccessToken);
 
-        HttpResponseMessage response = await _httpClient.GetAsync($"{ToDoHttpClientConstants.GET_DIRECTORY_BY_ID_URL}{directoryId}");
+        HttpResponseMessage response = await _httpClient.GetAsync($"{HttpClientsConstants.TODO_GET_DIRECTORY_BY_ID_URL}{directoryId}");
 
         if (!response.IsSuccessStatusCode)
         {

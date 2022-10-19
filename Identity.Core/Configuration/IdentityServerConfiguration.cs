@@ -22,7 +22,8 @@ public static class IdentityServerConfiguration
                 },
                 AllowAccessTokensViaBrowser = true,
                 RequireConsent = false,
-                AllowOfflineAccess = true
+                AllowOfflineAccess = true,
+                AbsoluteRefreshTokenLifetime = TimeSpan.FromDays(30).Seconds
             },
             new()
             {

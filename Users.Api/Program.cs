@@ -2,6 +2,7 @@ using Common.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Users.BusinessLogic;
 using Users.BusinessLogic.Services;
 using Users.BusinessLogic.Services.Grpc;
 using Users.BusinessLogic.Services.Interfaces;
@@ -31,7 +32,7 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>()
         options.ApiName = identitySettingsSection.GetValue<string>("Audience");
     });
 
-builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.ConfigureBusinessLogic();
 
 builder.Services.AddGrpc();
 

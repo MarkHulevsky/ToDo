@@ -1,6 +1,6 @@
 ﻿namespace Users.BusinessLogic.Constants;
 
-public static class AccountConstants
+public static class UserConstants
 {
     /*--------Information--------*/
     public const string USER_CREATED_SUCCESSFULLY = "We will send a confirmation message to your email.";

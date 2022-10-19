@@ -24,7 +24,7 @@ public class AccountService: IAccountService
         {
             return new BaseResponseModel
             {
-                Message = AccountConstants.USER_ALREADY_EXISTS_ERROR
+                Message = UserConstants.USER_ALREADY_EXISTS_ERROR
             };
         }
 
@@ -49,7 +49,7 @@ public class AccountService: IAccountService
         return new BaseResponseModel
         {
             IsSucceeded = true,
-            Message = AccountConstants.USER_CREATED_SUCCESSFULLY
+            Message = UserConstants.USER_CREATED_SUCCESSFULLY
         };
     }
 

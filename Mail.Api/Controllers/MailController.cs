@@ -1,4 +1,4 @@
-﻿using Mail.BusinessLogic.Models.Request;
+﻿using Mail.BusinessLogic.Models;
 using Mail.BusinessLogic.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +18,9 @@ public class MailController: ControllerBase
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> SendEmail([FromBody] SendEmailRequest request)
+    public async Task<IActionResult> SendEmail([FromBody] SendViaEmailQueueMessageModel queueMessageModel)
     {
-        await _mailService.SendEmailAsync(request);
+        await _mailService.SendFileViaEmailAsync(queueMessageModel);
 
         return Ok();
     }

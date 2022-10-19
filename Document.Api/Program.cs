@@ -17,6 +17,9 @@ builder.Services.AddSwaggerGen();
 IConfigurationSection identitySettingsSection = builder.Configuration.GetSection("IdentitySettings");
 builder.Services.Configure<IdentitySettingsModel>(identitySettingsSection);
 
+IConfigurationSection rabbitMqSettingsSection = builder.Configuration.GetSection("RabbitMQ");
+builder.Services.Configure<RabbitMqSettingsModel>(rabbitMqSettingsSection);
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
@@ -46,8 +49,7 @@ builder.Services.AddSingleton(_ =>
 
 builder.Services
     .ConfigureDataAccess()
-    .ConfigureBusinessLogic()
-    .ConfigureAutoMapper();
+    .ConfigureBusinessLogic();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
